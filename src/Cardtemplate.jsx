@@ -28,39 +28,6 @@ constructor(props){
 
 
 
-//      jobCardData=[{
-//         jobTitle: 'frontend engineer',
-//         companyName: 'weekday',
-//         location: 'delhi',
-//         jobDesription: 'lorem ipsum..  ',
-//         experienceRequired: '1 year',
-
-
-//     },
-// {
-//     jobTitle: 'frontend engineer',
-//         companyName: 'weekday',
-//         location: 'delhi',
-//         jobDesription: 'lorem ipsum..  ',
-//         experienceRequired: '1 year',
-// },
-// {
-//     jobTitle: 'frontend engineer',
-//     companyName: 'weekday',
-//     location: 'delhi',
-//     jobDesription: 'lorem ipsum..  ',
-//     experienceRequired: '1 year',
-
-
-// },
-// {
-//     jobTitle: 'frontend engineer',
-//     companyName: 'weekday',
-//     location: 'delhi',
-//     jobDesription: 'lorem ipsum..  ',
-//     experienceRequired: '1 year',
-// }]
-
 
 
 

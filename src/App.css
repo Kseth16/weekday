@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Evenly distribute items along the main axis */
+}
+
+.flex-item {
+  width: calc(33.33% - 10px); /* Adjust width based on your preference */
+  /* Subtracting margin/padding to ensure even spacing */
+}
