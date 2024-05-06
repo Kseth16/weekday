@@ -17,9 +17,16 @@ Apply button/link
 
 */
 
-function Cardtemplate(){
+export default class Cardtemplate extends React.Component{
+constructor(props){
+    super(props);
+    console.log(props);
+}
 
-    const jobCardData=[{
+
+
+
+     jobCardData=[{
         jobTitle: 'frontend engineer',
         companyName: 'weekday',
         location: 'delhi',
@@ -52,11 +59,16 @@ jobTitle: 'frontend engineer',
     experienceRequired: '1 year',
 }]
 
+
+
+
+    render(){
     return(
         <div>
         <p>card template boiler plate</p>
         </div>
     )
+
+    }
 }
 
-export default Cardtemplate;
