@@ -70,7 +70,11 @@ const data = await response.json();
 //fills the jobcard array with new data 12 at a time and adds an offset of 12 so that none are repeated 
 
 setJobCardData(prevData => [...prevData,...data.jdList])
-setOff(off+12);
+
+// if(window.innerHeight + document.documentElement.scrollTop + 1 >=document.documentElement.scrollHeight){
+//   setOff(off+12);
+// }
+// setOff(off+12);
 // able to add the 12 and keep going thorugh the list 
 // add changes to append to jobcard and make it so that it only fires off when i reach end of window  
  
@@ -80,12 +84,42 @@ console.log(off);
 }
   };
 
+
+  // const handleScroll=()=>{
+
+    
+  //   // if(window.innerHeight + document.documentElement.scrollTop + 1 >=document.documentElement.scrollHeight){
+  //   //   setOff(off+12);
+  //   // }
+
+  // }
+
+  
+
 fetchData();
 
 
 
 
 },[off]);
+
+const handleScroll=()=>{
+
+    
+    if(window.innerHeight + document.documentElement.scrollTop + 1 >=document.documentElement.scrollHeight){
+      off+=12;
+      setOff(off);
+    }
+
+  }
+
+
+
+useEffect(()=>{
+  window.addEventListener("scroll", handleScroll);
+
+  
+},[])
 
 
 
@@ -120,7 +154,7 @@ return (
     </div>
 
 
-
+<h1 style={{textAlign:"center"}}>Loading....</h1>
 </>
   );
 }
