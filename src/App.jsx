@@ -19,7 +19,7 @@ import Cardtemplate from './Cardtemplate'
 
 function App() {
 let [jobCardData, setJobCardData]= useState([]);
-let [off,setOff] = useState(9);
+let [off,setOff] = useState(0);
 
 //declaring state variable 
 
@@ -37,7 +37,7 @@ useEffect(() => {
 // setting body parameters
 
 const body=JSON.stringify({
-  "limit": 24,
+  "limit": 12,
   "offset": off
 });
 
@@ -66,12 +66,15 @@ const data = await response.json();
 
 
 //filling job card with data.jdList or the json data this will be mapped to dynamically render data
-setJobCardData(prevData=>{
-  //checks if first job's Uid is there if it isnt then the others are not either if there is then dont add
-  const isDatathere= prevData.some(item =>item.jdUid === data.jdList[0].jdUid);
-  return isDatathere ? prevData : [...prevData,...data.jdList];
-})
-setOff(9)
+
+//fills the jobcard array with new data 12 at a time and adds an offset of 12 so that none are repeated 
+
+setJobCardData(prevData => [...prevData,...data.jdList])
+setOff(off+12);
+// able to add the 12 and keep going thorugh the list 
+// add changes to append to jobcard and make it so that it only fires off when i reach end of window  
+ 
+console.log(off);
 } catch(error){
   console.error(error);
 }
