@@ -66,14 +66,44 @@ constructor(props){
 
     render(){
     return(
+        
         <div id="cardtemplate">
 <Card variant="outlined" style={{ paddingBottom: "10px" }}>
-    <h1>    {this.props.companyName}
-    </h1>    
-
     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {this.props.companyName}
     </Typography>
+
+
+
+    <h1>    {this.props.jobTitle} </h1>    
+
+    <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
+        {this.props.location}
+    </Typography>
+
+    <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
+        Estimated Salary: $$$$$
+    </Typography>
+
+    <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
+        About Company:
+    </Typography>
+    <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+        About us
+    </Typography>
+    <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+        {this.props.jobDesription}
+        {/* add the show more function here */}
+    </Typography>
+
+    <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
+    Minimum Experience
+    </Typography>
+    <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
+    {this.props.experienceRequired}
+    </Typography>
+
+
 
 
 
