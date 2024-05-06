@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 
 
 
+    // allows for dynamic rendering 
 
 export default class Cardtemplate extends React.Component{
 constructor(props){
@@ -24,7 +25,7 @@ constructor(props){
 
     render(){
     return(
-        
+        //creating base card template
         <div id="cardtemplate">
     <Card variant="outlined">
     <img src={this.props.logoUrl} alt={this.props.companyName+" logo"} />
