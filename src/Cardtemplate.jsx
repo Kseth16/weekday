@@ -1,8 +1,10 @@
 import React from "react";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 
+// this is the template for all cards
 
 /*
 
@@ -26,46 +28,57 @@ constructor(props){
 
 
 
-     jobCardData=[{
-        jobTitle: 'frontend engineer',
-        companyName: 'weekday',
-        location: 'delhi',
-        jobDesription: 'lorem ipsum..  ',
-        experienceRequired: '1 year',
+//      jobCardData=[{
+//         jobTitle: 'frontend engineer',
+//         companyName: 'weekday',
+//         location: 'delhi',
+//         jobDesription: 'lorem ipsum..  ',
+//         experienceRequired: '1 year',
 
 
-    },
-{
-    jobTitle: 'frontend engineer',
-        companyName: 'weekday',
-        location: 'delhi',
-        jobDesription: 'lorem ipsum..  ',
-        experienceRequired: '1 year',
-},
-{
-    jobTitle: 'frontend engineer',
-    companyName: 'weekday',
-    location: 'delhi',
-    jobDesription: 'lorem ipsum..  ',
-    experienceRequired: '1 year',
+//     },
+// {
+//     jobTitle: 'frontend engineer',
+//         companyName: 'weekday',
+//         location: 'delhi',
+//         jobDesription: 'lorem ipsum..  ',
+//         experienceRequired: '1 year',
+// },
+// {
+//     jobTitle: 'frontend engineer',
+//     companyName: 'weekday',
+//     location: 'delhi',
+//     jobDesription: 'lorem ipsum..  ',
+//     experienceRequired: '1 year',
 
 
-},
-{
-jobTitle: 'frontend engineer',
-    companyName: 'weekday',
-    location: 'delhi',
-    jobDesription: 'lorem ipsum..  ',
-    experienceRequired: '1 year',
-}]
+// },
+// {
+//     jobTitle: 'frontend engineer',
+//     companyName: 'weekday',
+//     location: 'delhi',
+//     jobDesription: 'lorem ipsum..  ',
+//     experienceRequired: '1 year',
+// }]
 
 
 
 
     render(){
     return(
-        <div>
-        <p>card template boiler plate</p>
+        <div id="cardtemplate">
+<Card variant="outlined" style={{ paddingBottom: "10px" }}>
+    <h1>    {this.props.companyName}
+    </h1>    
+
+    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {this.props.companyName}
+    </Typography>
+
+
+
+        </Card>
+
         </div>
     )
 

@@ -31,7 +31,9 @@ function App() {
       </p> */}
 
 
-      <Cardtemplate />
+      <Cardtemplate 
+        companyName="Weekday"
+      />
     </>
   )
 }
