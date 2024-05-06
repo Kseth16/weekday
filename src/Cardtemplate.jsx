@@ -27,20 +27,21 @@ constructor(props){
         
         <div id="cardtemplate">
     <Card variant="outlined">
+    <img src={this.props.logoUrl} alt={this.props.companyName+" logo"} />
     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             {this.props.companyName}
     </Typography>
 
 
 
-    <h1>    {this.props.jobTitle} </h1>    
+    <h1>    {this.props.jobRole} </h1>    
 
     <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
         {this.props.location}
     </Typography>
 
     <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
-        Estimated Salary: $$$$$
+        Estimated Salary: {this.props.minJdSalary}K {this.props.salaryCurrencyCode} - {this.props.maxJdSalary}K {this.props.salaryCurrencyCode}
     </Typography>
 
     <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
@@ -55,7 +56,8 @@ constructor(props){
     </Typography>
 
     <Typography sx={{ fontSize: 12 }} color="text.secondary" gutterBottom>
-    Minimum Experience
+    Minimum Experience {this.props.minExp} - {this.props.maxExp} years
+    {/* add conditional rendering so if min null set to 0 if max null dont render - max  */}
     </Typography>
     <Typography sx={{ fontSize: 12 }} color="text.primary" gutterBottom>
     {this.props.experienceRequired}

@@ -8,7 +8,7 @@ function App() {
   // const [count, setCount] = useState(0)
 
 
-
+  let data;
 
    let jobCardData=[{
         jobTitle: 'frontend engineer',
@@ -85,7 +85,11 @@ const requestOptions ={
 
 fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
 .then((response) => response.text())
-.then((result) => console.log(result))
+.then((result) => {
+  console.log(result);
+  data=JSON.stringify(result);
+
+})
 .catch((error) => console.error(error));
 
 
