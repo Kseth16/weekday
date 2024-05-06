@@ -19,12 +19,13 @@ import Cardtemplate from './Cardtemplate'
 
 function App() {
 let [jobCardData, setJobCardData]= useState([]);
+let [off,setOff] = useState(9);
 
 //declaring state variable 
 
-let off=9;
 
-useEffect((off) => {
+
+useEffect(() => {
   const fetchData = async () => {
 
 
@@ -36,7 +37,7 @@ useEffect((off) => {
 // setting body parameters
 
 const body=JSON.stringify({
-  "limit": 12,
+  "limit": 24,
   "offset": off
 });
 
@@ -65,7 +66,12 @@ const data = await response.json();
 
 
 //filling job card with data.jdList or the json data this will be mapped to dynamically render data
-setJobCardData(data.jdList)
+setJobCardData(prevData=>{
+  //checks if first job's Uid is there if it isnt then the others are not either if there is then dont add
+  const isDatathere= prevData.some(item =>item.jdUid === data.jdList[0].jdUid);
+  return isDatathere ? prevData : [...prevData,...data.jdList];
+})
+setOff(9)
 } catch(error){
   console.error(error);
 }
@@ -76,7 +82,7 @@ fetchData();
 
 
 
-},[]);
+},[off]);
 
 
 
