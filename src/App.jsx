@@ -378,6 +378,7 @@ return (
           return jobdata.minExp<=minexp;
           //set to less than equal to, i think thats how minimum experience works
           //will show all jobs with min experience less than X 
+          //after looking at weekday and seeing it does the same logic i figure this is what was wanted
         }
         
       })

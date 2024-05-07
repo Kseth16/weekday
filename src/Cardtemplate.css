@@ -1,0 +1,30 @@
+.imgNameRolediv{
+
+    display: flex;
+
+}
+
+.insidecardpadding{
+    
+    padding: 20px;
+    padding-top: 30px;
+    /* padding-left: 20px; */
+
+}
+
+.companyNameAndRole{
+    padding-left: 10px;
+}
+
+.companyname{
+    margin-bottom: -25px;  
+    /* to bring name and role closer together like in th epicture */
+}
+
+.location{
+    margin-top: -20px;
+}
+
+.easyApplyButton{
+    background-color: #54EFC3;
+}
