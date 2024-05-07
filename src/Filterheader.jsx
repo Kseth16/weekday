@@ -8,54 +8,56 @@ function Filterhead( {Locationlist}){
     return(
 
         //make basic filter to check for listing with min exp is less than or equal to 
-        <div className="filterdiv">
-    <Autocomplete
+    <div className="filterdiv">
+    <Autocomplete className="filterItems"
       disablePortal
       id="experience-combo-box"
       options={[1,2,3,4,5,6,7,8,9]}
-      sx={{ width: 300 }}
+      sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Minimum Exp" />}
         />
 
 
         {/* make basic filter to check where company name is equal to what you write */}
-<Autocomplete
+    {/* <Autocomplete
       disablePortal
       id="experience-combo-box"
-      options={[1,2,3,4,5,6,7,8,9]}
+    //   options={[1,2,3,4,5,6,7,8,9]}
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Company name" />}
-        />
+        /> */}
+
+        <TextField className="filterItems" style={{paddingRight:"10px"}} id="outlined-basic" sx={{ width: 250 }} label="Company Name" variant="outlined" />
 
 
 {/* make basic filter to check where location is equal to what you write */}
-<Autocomplete
+    <Autocomplete className="filterItems"
       disablePortal
       id="experience-combo-box"
       options={Locationlist}
-      sx={{ width: 300 }}
+      sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="location" />}
         />
 
 
 {/* make basic filter to check if location is equal to remote */}
 
-<Autocomplete
+    <Autocomplete className="filterItems"
       disablePortal
       id="experience-combo-box"
       options={["Remote","Inperson"]}
-      sx={{ width: 300 }}
+      sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Remote/Inperson" />}
         />
 
 
 {/* since there is no tech stack object in API make a fitler to check if role includes what you write */}
 
-<Autocomplete
+    <Autocomplete className="filterItems"
       disablePortal
       id="experience-combo-box"
       options={['IOS','Android','frontend',"backend"]}
-      sx={{ width: 300 }}
+      sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Tech Stack" />}
         />
 
@@ -64,11 +66,11 @@ function Filterhead( {Locationlist}){
 
 {/* same like the one before but just change includes to equal to what you write */}
 
-<Autocomplete
+    <Autocomplete className="filterItems"
       disablePortal
       id="experience-combo-box"
       options={['IOS','Android','frontend',"backend","tech lead"]}
-      sx={{ width: 300 }}
+      sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Role" />}
         />
 
@@ -76,11 +78,11 @@ function Filterhead( {Locationlist}){
 
 {/* basic filter to check if base pay is equal to or greater than */}
 
-<Autocomplete
+    <Autocomplete className="filterItems"
       disablePortal
       id="experience-combo-box"
       options={['0','10K','20k','30k','40k','50k','60k','70k','80k','90k','100k']}
-      sx={{ width: 300 }}
+      sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Minimum Salary" />}
         />
 

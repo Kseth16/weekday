@@ -1,3 +1,8 @@
 .filterdiv {
     display: flex;
+    
+}
+
+.filterItems {
+    padding-right: 10px;
 }
