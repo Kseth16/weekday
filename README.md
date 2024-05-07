@@ -10,6 +10,5 @@ Currently, two official plugins are available:
 
 to start file locally cd into weekday and run command "npm run dev" this should start the file in your local computer 
 
-I had a lot of fun doing this and would be very excited if I could be considered for this job. After checking out weekday on linkedin I think your product is really amazing and would love to be a part of your team. 
+Thank you for considering my application. I look forward to the opportunity to discuss my submission further and demonstrate my skills in more detail.
 
-I do hope you like this react webpage as much as i enjoyed creating it.
