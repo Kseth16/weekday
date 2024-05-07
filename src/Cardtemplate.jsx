@@ -48,7 +48,7 @@ toggleShowMore= () => {
     <div className="imgNameRolediv">
     
     <div className="imgdiv">
-    <img  height='50px' src={this.props.logoUrl} alt={this.props.companyName+" logo"} />
+    <img  height='50px' width='50px' src={this.props.logoUrl} alt={this.props.companyName+" logo"} />
     </div>
 
     <div className="companyNameAndRole">
