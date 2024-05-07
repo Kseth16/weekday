@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Cardtemplate from './Cardtemplate'
+import Filterhead from './Filterheader'
 
 
 
@@ -180,11 +181,23 @@ useEffect(()=>{
 
 // set up filtering over here with the jobcard data 
 
+const locationslist=[];
 
+jobCardData.forEach(jobdata =>{
+  if(!locationslist.includes(jobdata.location)){
+    locationslist.push(jobdata.location);
+  }
+});
+
+//will add all unique location to location list for rendering in filter
 
 
 return (
 <>
+
+
+
+<Filterhead Locationlist={locationslist}  />
     <div className='maincontainer'>
       <div className='flex-container'>
 
