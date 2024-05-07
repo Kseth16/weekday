@@ -24,9 +24,20 @@ import Autocomplete from '@mui/material/Autocomplete';
 function App() {
 let [jobCardData, setJobCardData]= useState([]);
 let [off,setOff] = useState(0);
+let [minexp,setMinexp]= useState(0);
+let [location,setLocation]= useState(""); // so that it renders properly
+let [companyName,setCompanyName]= useState("");
+let [isRemote,setIsRemote]= useState("false");
+let [techStack,setTechStack]= useState("");
+let [role,setRole]= useState("");
+let [minSalary,minSalaryHandler]= useState(0);
+
+
 
 //declaring state variable 
 const firedref=useRef(false); // was hacing a bug where double rendering was occuring as first this helps fix bug
+
+const expfiltered=useRef(false); // an issue with being able to render no jobs found 
 
 useEffect(() => {
 
@@ -192,19 +203,85 @@ jobCardData.forEach(jobdata =>{
   }
 });
 
-//will add all unique location to location list for rendering in filter
+//above code will add all unique location to location list for rendering in filter
+
+
+
+//do filter here 
+
+//minimum experience 
+//change carddata to show jobs where min exper is less than equal to minimum value selected
+
+// const expHandler=(event,value)=>{
+//   console.log(value)
+// };
+const expHandler=(event,value)=>{
+  console.log(value);
+  setMinexp(value);
+};
+
+const companynameHandler=(event)=>{
+  console.log(event.target.value);
+  setCompanyName(event.target.value);
+};
+
+const locationHandler=(event,value)=>{
+  console.log(value);
+  setLocation(value);
+};
+
+
+const isremoteHandler=(event,value)=>{
+  console.log(value);
+  setIsRemote(value);
+};
+
+
+const techstackHandler=(event,value)=>{
+  console.log(value);
+  setTechStack(value);
+};
+
+const roleHandler=(event,value)=>{
+  console.log(value);
+  setRole(value);
+};
+
+
+const minpayHandler=(event,value)=>{
+  console.log(value);
+  minSalaryHandler(value);
+};
+
+
+// console.log(minexp+" mininin");
+
+
+
+
+
+// jobCardData=jobCardData.filter(
+//   (jobdata)=>{
+//     return jobdata.minexp<=minexp;
+//   }
+
+  //less than equal to min exp
+
+
+  console.log(minexp+" value min")
 
 
 return (
 <>
 
 
-
+{/* rendering it straight from here just so that it is easier to acess data  */}
 <div className="filterdiv">
     <Autocomplete className="filterItems"
+    onChange={expHandler}
       disablePortal
       id="experience-combo-box"
-      options={[1,2,3,4,5,6,7,8,9]}
+      options={['0','1','2','3','4','5','6','7','8','9','10']}
       sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Minimum Exp" />}
         />
@@ -213,11 +290,12 @@ return (
         {/* make basic filter to check where company name is equal to what you write */}
     
 
-        <TextField className="filterItems" style={{paddingRight:"10px"}} id="outlined-basic" sx={{ width: 250 }} label="Company Name" variant="outlined" />
+        <TextField onChange={companynameHandler} className="filterItems" style={{paddingRight:"10px"}} id="outlined-basic" sx={{ width: 250 }} label="Company Name" variant="outlined" />
 
 
 {/* make basic filter to check where location is equal to what you write */}
     <Autocomplete className="filterItems"
+    onChange={locationHandler}
       disablePortal
       id="experience-combo-box"
       options={locationslist}
@@ -229,20 +307,22 @@ return (
 {/* make basic filter to check if location is equal to remote */}
 
     <Autocomplete className="filterItems"
+    onChange={isremoteHandler}
       disablePortal
       id="experience-combo-box"
-      options={["Remote","Inperson"]}
+      options={["remote",]}
       sx={{ width: 250 }}
-      renderInput={(params) => <TextField {...params} label="Remote/Inperson" />}
+      renderInput={(params) => <TextField {...params} label="Remote" />}
         />
 
 
 {/* since there is no tech stack object in API make a fitler to check if role includes what you write */}
 
     <Autocomplete className="filterItems"
+    onChange={techstackHandler}
       disablePortal
       id="experience-combo-box"
-      options={['IOS','Android','frontend',"backend"]}
+      options={['ios','android','frontend',"backend"]}
       sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Tech Stack" />}
         />
@@ -253,9 +333,10 @@ return (
 {/* same like the one before but just change includes to equal to what you write */}
 
     <Autocomplete className="filterItems"
+    onChange={roleHandler}
       disablePortal
       id="experience-combo-box"
-      options={['IOS','Android','frontend',"backend","tech lead"]}
+      options={['ios','android','frontend',"backend","tech lead"]}
       sx={{ width: 250 }}
       renderInput={(params) => <TextField {...params} label="Role" />}
         />
@@ -265,11 +346,12 @@ return (
 {/* basic filter to check if base pay is equal to or greater than */}
 
     <Autocomplete className="filterItems"
+    onChange={minpayHandler}
       disablePortal
       id="experience-combo-box"
-      options={['0','10K','20k','30k','40k','50k','60k','70k','80k','90k','100k']}
+      options={['0','10','20','30','40','50','60','70','80','90','100']}
       sx={{ width: 250 }}
-      renderInput={(params) => <TextField {...params} label="Minimum Salary" />}
+      renderInput={(params) => <TextField {...params} label="Minimum Salary in thousands USD" />}
         />
 
 
@@ -280,22 +362,150 @@ return (
 
 
       {/* mapping over json data to dynamically render job cards  */}
-      {jobCardData.map((jobCardData,index)=>(
+      {
+        
+        jobCardData
+      /* .filter((jobCardData) => ? jobCardData.minExp <=minexp) */
+      .filter((jobdata)=>{
+        //filter for min exp
+        if(minexp===0 || minexp===null){
+          {/* expfiltered.current=false; */}
+
+          return true;
+        }else{
+          {/* expfiltered.current=true; */}
+          
+          return jobdata.minExp<=minexp;
+          //set to less than equal to, i think thats how minimum experience works
+          //will show all jobs with min experience less than X 
+        }
+        
+      })
+
+      //filter for company name add it if it contains the letters
+
+      .filter((jobdata)=>{
+        console.log(companyName+" this si company name");
+
+        if(companyName===null || companyName===""){
+          return true;
+        }else{
+
+        console.log(companyName+" this si company name");
+        return jobdata.companyName.includes(companyName);
+        }
+      
+      })
+
+
+      .filter((jobdata)=>{
+        {/* console.log(location+" this is location "); */}
+
+        if(location===null || location===""){
+          return true;
+        }else{
+
+        {/* console.log(location+" this si location"); */}
+        return jobdata.location.includes(location);
+        }
+      
+      })
+      
+
+
+      .filter((jobdata)=>{
+        {/* console.log(location+" this is location "); */}
+
+        if(isRemote===null || isRemote==="false" || isRemote !== "remote"){
+          return true;
+        }else{
+
+        {/* console.log(location+" this si location"); */}
+        return jobdata.location.includes("remote");
+        }
+      
+      })
+
+
+      .filter((jobdata)=>{
+        console.log(techStack+" this is tech ");
+
+        if(techStack===null || techStack===""){
+          return true;
+        }else{
+
+        console.log(techStack+" this si tech");
+        return jobdata.jobRole.includes(techStack);
+        }
+      
+      })
+
+
+      .filter((jobdata)=>{
+        {/* console.log(role+" this is role "); */}
+
+        if(role===null || role===""){
+          return true;
+        }else{
+
+        {/* console.log(role+" this si role"); */}
+        return jobdata.jobRole.includes(role);
+        }
+      
+      })
+
+
+      .filter((jobdata)=>{
+        //filter for min exp
+        if(minSalary===0 || minSalary===null || minSalary===undefined ){
+          {/* expfiltered.current=false; */}
+        console.log(minSalary+" this si min sal null");
+          return true;
+        }else{
+          {/* expfiltered.current=true; */}
+          console.log(minSalary+" this si min sal");
+
+          return jobdata.minJdSalary>=minSalary;
+          //set to greater than equal to
+        }
+        
+      })
+
+
+
+      
+      
+      
+      
+      .map((datacards,index)=>{
+
+    
+      
+      
+      
+      return (
+        <>
+        
         <Cardtemplate
         key={index}
-        companyName={jobCardData.companyName}
-        minJdSalary={jobCardData.minJdSalary}
-        maxJdSalary={jobCardData.maxJdSalary}
-        salaryCurrencyCode={jobCardData.salaryCurrencyCode}
-        minExp={jobCardData.minExp}
-        maxExp={jobCardData.maxExp}
-        logoUrl={jobCardData.logoUrl}
-        jobRole={jobCardData.jobRole}
-        location={jobCardData.location}
-        jobDesription={jobCardData.jobDetailsFromCompany}
-        experienceRequired={jobCardData.experienceRequired}
+        companyName={datacards.companyName}
+        minJdSalary={datacards.minJdSalary}
+        maxJdSalary={datacards.maxJdSalary}
+        salaryCurrencyCode={datacards.salaryCurrencyCode}
+        minExp={datacards.minExp}
+        maxExp={datacards.maxExp}
+        logoUrl={datacards.logoUrl}
+        jobRole={datacards.jobRole}
+        location={datacards.location}
+        jobDesription={datacards.jobDetailsFromCompany}
+        experienceRequired={datacards.experienceRequired}
         />
-      ))}
+
+
+
+
+</>
+      );})}
 
       </div>
 
@@ -308,5 +518,7 @@ return (
 </>
   );
 }
+
+
 
 export default App
