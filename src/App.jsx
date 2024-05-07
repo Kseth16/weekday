@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -22,10 +22,13 @@ let [jobCardData, setJobCardData]= useState([]);
 let [off,setOff] = useState(0);
 
 //declaring state variable 
-
-
+const firedref=useRef(false); // was hacing a bug where double rendering was occuring as first this helps fix bug
 
 useEffect(() => {
+
+// console.log(firedref.current+" fired is ")
+  if(firedref.current){ // checks if fired is true since set to false wont go through 
+   
   const fetchData = async () => {
 
 
@@ -37,9 +40,11 @@ useEffect(() => {
 // setting body parameters
 
 const body=JSON.stringify({
-  "limit": 12,
+  "limit": 9,
   "offset": off
+  
 });
+console.log("changing offset");
 
 
 
@@ -62,6 +67,7 @@ const response = await fetch("https://api.weekday.technology/adhoc/getSampleJdJS
 
 //data is retrived into data
 const data = await response.json();
+console.log(data);
 
 
 
@@ -70,6 +76,45 @@ const data = await response.json();
 //fills the jobcard array with new data 12 at a time and adds an offset of 12 so that none are repeated 
 
 setJobCardData(prevData => [...prevData,...data.jdList])
+// need to update this so that the job uid of the first job is it is present then dont render
+
+
+
+
+
+
+
+// setJobCardData(prevData =>{
+
+
+//   if(prevData !== null && prevData !== undefined ){
+//   const Datatoadd= data.jdList.filter(newValue=>
+//     !prevData.some(prevValue =>prevValue.jobUid === newValue.jobUid)
+//   );
+//   // goes through old data and makes sure that new data doesnt exist in it helps with bug that renders inital data twice
+
+//   return[...prevData,...Datatoadd];
+// }else{
+//   // setJobCardData(prevData => [...prevData,...data.jdList])
+//   return[...prevData,...Datatoadd];
+
+// }
+// } );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // if(window.innerHeight + document.documentElement.scrollTop + 1 >=document.documentElement.scrollHeight){
 //   setOff(off+12);
@@ -79,6 +124,7 @@ setJobCardData(prevData => [...prevData,...data.jdList])
 // add changes to append to jobcard and make it so that it only fires off when i reach end of window  
  
 console.log(off);
+
 } catch(error){
   console.error(error);
 }
@@ -98,18 +144,26 @@ console.log(off);
 
 fetchData();
 
+  }
 
-
-
+firedref.current=true; // fire is now true stops double rendering at begining and works properly yaaay 
 },[off]);
 
 const handleScroll=()=>{
 
     
     if(window.innerHeight + document.documentElement.scrollTop + 1 >=document.documentElement.scrollHeight){
-      off+=12;
-      setOff(off);
+      console.log("next");
+    
+      // setOff(off+9);
+      
+      setOff(prevOff => prevOff + 9);
+
+      
+      
+      console.log(off+" changing off inscroller function");
     }
+  
 
   }
 
@@ -118,6 +172,9 @@ const handleScroll=()=>{
 useEffect(()=>{
   window.addEventListener("scroll", handleScroll);
 
+  return()=>{
+    window.removeEventListener("scroll",handleScroll);
+  }
   
 },[])
 
